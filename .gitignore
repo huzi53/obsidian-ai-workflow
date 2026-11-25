@@ -1,0 +1,5 @@
+# Your private vault and secrets never go to GitHub
+vault/
+.env
+.env.*
+projects/
