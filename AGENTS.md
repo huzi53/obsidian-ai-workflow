@@ -63,7 +63,7 @@ These rules pair with the **i-have-adhd** skill ([ayghri/i-have-adhd](https://gi
 - **Commit checkpoints:** in a git repo, commit locally after each feature works and is tested, and tell me the hash. **Never push without asking.**
 - **Feasibility first:** for hosting, networking or tunnel work, give a go/no-go verdict against my limits plus the simplest alternative, before any setup.
 - **Honest output:** every fact on a page, video or post (a number, a result, a quote, "who did it") must be real or carry a visible label ("demo data", "illustrative"). Jokes and tone are free; facts aren't.
-- **Order for big work:** `brief` → `whiteboard` → `research-pipeline` → build → `site-loop` → `ship`.
+- **Order for big work:** `brief` → `whiteboard` → `research-pipeline` → build → `site-loop` → `deploy`.
 
 ## 6. Safety
 
@@ -73,7 +73,7 @@ These rules pair with the **i-have-adhd** skill ([ayghri/i-have-adhd](https://gi
 
 ## 7. Skills
 
-Skills live in `skills/<name>/SKILL.md`. When I type a skill's name in any form (`/brief`, `$brief`, `brief`, or "run brief"), open that file and follow it step by step. If your tool grabs `/` for its own commands, I'll type the plain name.
+Skills live in `skills/<name>/SKILL.md`, copied in from [site-loop-kit](https://github.com/huzi53/site-loop-kit) (see README). When I type a skill's name in any form (`/brief`, `$brief`, `brief`, or "run brief"), open that file and follow it step by step. If your tool grabs `/` for its own commands, I'll type the plain name.
 
 | Skill | Use it for |
 |---|---|
@@ -83,5 +83,7 @@ Skills live in `skills/<name>/SKILL.md`. When I type a skill's name in any form 
 | `whiteboard` | Plan a multi-step project in phases (solo or team) |
 | `research-pipeline` | Deep research with named tools, a verifier and a vault save |
 | `site-loop` | Score-and-fix loop for a website before sharing it |
-| `ship` | Test, secret-scan, deploy, commit locally |
+| `deploy` | Test, secret-scan, deploy, commit locally |
 | `prove-test` | Test a tool or idea from a post against my own bar before trying it |
+| `missed-links` | List vault notes that name another note without linking it |
+| `vault-check` | Health check of the vault: broken links, missing frontmatter |

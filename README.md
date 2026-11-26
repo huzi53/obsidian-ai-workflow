@@ -14,7 +14,7 @@ Made by **Huzi**. I have ADHD, so the whole system is built around one idea: I s
 |---|---|
 | [`AGENTS.md`](AGENTS.md) | **The rules.** One file every AI tool reads: vault, routine, answer format, research, build and safety rules. |
 | [`CLAUDE.md`](CLAUDE.md), [`GEMINI.md`](GEMINI.md) | Tiny pointers that load `AGENTS.md` in Claude Code and Gemini CLI. |
-| [`skills/`](skills/) | 8 reusable workflows (brief, where, save-note, whiteboard, research-pipeline, site-loop, ship, prove-test). |
+| Skills | **Not in this repo any more.** The 10 skills (brief, where, save-note, whiteboard, research-pipeline, site-loop, deploy, prove-test, missed-links, vault-check) now live in **[site-loop-kit](https://github.com/huzi53/site-loop-kit)**, so there's one up-to-date copy. Setup step 2 copies them in. |
 | [`vault-template/`](vault-template/) | An empty starter vault: index, one example project hub with Research / Decisions / Open Questions notes. |
 | `.gitignore` | Keeps your `vault/` and `.env` files out of git. |
 
@@ -41,7 +41,7 @@ For big projects, the skills chain together:
 
 ```mermaid
 flowchart LR
-    b[brief] --> w[whiteboard] --> r[research-pipeline] --> x[build] --> s[site-loop] --> p[ship]
+    b[brief] --> w[whiteboard] --> r[research-pipeline] --> x[build] --> s[site-loop] --> p[deploy]
 ```
 
 How the vault is laid out:
@@ -84,19 +84,25 @@ The cloned folder is your workspace: start every AI session inside it, so the ru
    ```
    git clone https://github.com/huzi53/obsidian-ai-workflow
    ```
-2. **Make your vault.** Copy `vault-template/` to a new folder called `vault/` inside the repo. `vault/` is git-ignored, so your private notes never get pushed. Open it in [Obsidian](https://obsidian.md) if you like; the AI only needs the folder. Keep `vault-template/` as is: the AI copies it for each new project. Already have a vault? Put its path in `AGENTS.md` instead.
+2. **Get the skills.** Clone [site-loop-kit](https://github.com/huzi53/site-loop-kit) into your home folder (its tools look for it there), then copy its `skills/` folder into this repo as `skills/` (git-ignored here):
+   ```
+   cd ~
+   git clone https://github.com/huzi53/site-loop-kit
+   ```
+   Claude Code users can install them as a plugin instead: see the [site-loop-kit README](https://github.com/huzi53/site-loop-kit#install).
+3. **Make your vault.** Copy `vault-template/` to a new folder called `vault/` inside the repo. `vault/` is git-ignored, so your private notes never get pushed. Open it in [Obsidian](https://obsidian.md) if you like; the AI only needs the folder. Keep `vault-template/` as is: the AI copies it for each new project. Already have a vault? Put its path in `AGENTS.md` instead.
    Put the code for each project in `projects/<name>/` (also git-ignored), each as its own git repo, so the AI's local commits land there and not in this one.
-3. **Fill in `AGENTS.md`.** Replace the 4 `FILL IN` lines at the top: your name, vault path, country and limits.
-4. **Start your AI tool in the repo folder.** It picks up the rules like this:
+4. **Fill in `AGENTS.md`.** Replace the 4 `FILL IN` lines at the top: your name, vault path, country and limits.
+5. **Start your AI tool in the repo folder.** It picks up the rules like this:
 
 | Tool | How it picks up the rules | Skills |
 |---|---|---|
-| **Claude Code** (tested) | Reads `CLAUDE.md`, which loads `AGENTS.md` | Copy `skills/*` to `.claude/skills/`, then type `/brief` etc. |
+| **Claude Code** (tested) | Reads `CLAUDE.md`, which loads `AGENTS.md` | Install the site-loop-kit plugin, or copy `skills/*` to `.claude/skills/`, then type `/brief` etc. |
 | **Codex CLI** | Reads `AGENTS.md` on its own | Type `brief` or "run brief" (AGENTS.md tells it where the skill files are) |
 | **Gemini CLI** | Reads `GEMINI.md`, which loads `AGENTS.md` | Say "follow skills/brief/SKILL.md" |
 | **Any other agent** (Grok, Cursor, Copilot...) | Tell it at the start: "Read AGENTS.md and follow it" | Say "follow skills/<name>/SKILL.md" |
 
-5. **Try it.** Start a session and type `where`, then ask for something small. You should get the answer first and one next step at the end.
+6. **Try it.** Start a session and type `where`, then ask for something small. You should get the answer first and one next step at the end.
 
 ### Optional: install the ADHD skill
 
@@ -106,18 +112,20 @@ The answer format in `AGENTS.md` pairs with **[i-have-adhd](https://github.com/a
 
 ## The skills
 
-Each skill is a plain Markdown file with step-by-step instructions. Tools that support `SKILL.md` folders load them as commands; any other tool can just be told "follow skills/<name>/SKILL.md".
+The skills live in [site-loop-kit](https://github.com/huzi53/site-loop-kit) (setup step 2 copies them in). Each is a plain Markdown file with step-by-step instructions. Tools that support `SKILL.md` folders load them as commands; any other tool can just be told "follow skills/<name>/SKILL.md".
 
 | Skill | When to use it |
 |---|---|
-| [`brief`](skills/brief/SKILL.md) | Before a big or vague task: 3 lines (goal, format, tools), then wait for OK |
-| [`where`](skills/where/SKILL.md) | Back from a break or lost: goal, done ✅, now, next 2-min step |
-| [`save-note`](skills/save-note/SKILL.md) | Anything worth remembering, filed into the right vault note |
-| [`whiteboard`](skills/whiteboard/SKILL.md) | Plan a big project in phases on an Obsidian canvas, tagged solo or team |
-| [`research-pipeline`](skills/research-pipeline/SKILL.md) | Deep research with your named tools, a verifier, and a vault save |
-| [`site-loop`](skills/site-loop/SKILL.md) | Score-and-fix a website with 5 critics, up to 6 rounds, aiming for 8/10+ |
-| [`ship`](skills/ship/SKILL.md) | Test, secret-scan, deploy the public folder only, commit locally |
-| [`prove-test`](skills/prove-test/SKILL.md) | Test a tool from a post against *your* bar before you invest in it |
+| [`brief`](https://github.com/huzi53/site-loop-kit/blob/main/skills/brief/SKILL.md) | Before a big or vague task: 3 lines (goal, format, tools), then wait for OK |
+| [`where`](https://github.com/huzi53/site-loop-kit/blob/main/skills/where/SKILL.md) | Back from a break or lost: goal, done ✅, now, next 2-min step |
+| [`save-note`](https://github.com/huzi53/site-loop-kit/blob/main/skills/save-note/SKILL.md) | Anything worth remembering, filed into the right vault note |
+| [`whiteboard`](https://github.com/huzi53/site-loop-kit/blob/main/skills/whiteboard/SKILL.md) | Plan a big project in phases on an Obsidian canvas, tagged solo or team |
+| [`research-pipeline`](https://github.com/huzi53/site-loop-kit/blob/main/skills/research-pipeline/SKILL.md) | Deep research with your named tools, a verifier, and a vault save |
+| [`site-loop`](https://github.com/huzi53/site-loop-kit/blob/main/skills/site-loop/SKILL.md) | Score-and-fix a website with 5 critics, up to 6 rounds, aiming for 8/10+ |
+| [`deploy`](https://github.com/huzi53/site-loop-kit/blob/main/skills/deploy/SKILL.md) | Test, secret-scan, deploy the public folder only, commit locally |
+| [`prove-test`](https://github.com/huzi53/site-loop-kit/blob/main/skills/prove-test/SKILL.md) | Test a tool from a post against *your* bar before you invest in it |
+| [`missed-links`](https://github.com/huzi53/site-loop-kit/blob/main/skills/missed-links/SKILL.md) | List vault notes that name another note without linking it |
+| [`vault-check`](https://github.com/huzi53/site-loop-kit/blob/main/skills/vault-check/SKILL.md) | Health check of the vault: broken links, missing frontmatter, stale notes |
 
 Make your own: copy any skill folder, rename it, and rewrite the steps. Keep the `name` and `description` lines at the top so tools can find it.
 

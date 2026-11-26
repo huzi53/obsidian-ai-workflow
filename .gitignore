@@ -3,3 +3,6 @@ vault/
 .env
 .env.*
 projects/
+
+# Skills are copied in from site-loop-kit (see README)
+skills/
